@@ -1,9 +1,8 @@
 import "./css/Spin.css";
 import NewNavbar from "./components/NewNavbar";
 import { ethers } from "ethers";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import HealthNFTJSON from "./HealthNFT.json";
-import { useState} from "react";
 import { Fragment } from "react";
 
 export default function Transfernft() {
@@ -11,40 +10,75 @@ export default function Transfernft() {
   const [dialogMessage, setDialogMessage] = useState("");
   const [senderAddress, setSenderAddress] = useState("");
   const [receiverAddress, setReceiverAddress] = useState("");
+  const [nftList, setNftList] = useState([]);
+  const [selectedNft, setSelectedNft] = useState("");
+
   const walletAddr = async () => {
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const signer = provider.getSigner();
     const addr = await signer.getAddress();
     setSenderAddress(addr);
   };
-  walletAddr();
+
+  const fetchNftList = async () => {
+    
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const signer = provider.getSigner();
+    let contract = new ethers.Contract(
+      HealthNFTJSON.address,
+      HealthNFTJSON.abi,
+      signer
+    );
+    let nfts = await contract.getMyNFTs();
+
+    // const balance = await contract.balanceOf(senderAddress);
+    // const totalSupply = await contract.totalSupply();
+    // const nfts = [];
+
+    // for (let i = 0; i < totalSupply; i++) {
+    //   if (await contract.ownerOf(i) === senderAddress) {
+    //     const nft = {
+    //       tokenId: i,
+    //       name: await contract.nameOf(i),
+    //     };
+    //     nfts.push(nft);
+    //   }
+    // }
+ 
+    setNftList(nfts);
+
+  };
+
+
+
+  useEffect(() => {
+    walletAddr();
+    fetchNftList();
+  }, []);
+  
+
 
   const transfer = async (e) => {
     e.preventDefault();
 
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const signer = provider.getSigner();
-    // console.log(addr);
-
     const to = receiverAddress;
-    const tokenId = 0;
+    const tokenId = selectedNft;
     let contract = new ethers.Contract(
       HealthNFTJSON.address,
       HealthNFTJSON.abi,
       signer
     );
-    console.log(contract);
     let transaction = await contract.transferNFT(to, tokenId);
-    // console.log(transaction);
     await transaction.wait();
     setDialogMessage(`Successfully Transferred your NFT to address ${to}!`);
     setReceiverAddress("");
+    setSelectedNft("");
     setShowDialog(true);
-
-    // alert(`Successfully Transferred your NFT to address ${to}!`);
-
     window.location.replace("/profile");
   };
+
   function Dialog({ message, onClose }) {
     return (
       <Fragment>
@@ -93,8 +127,17 @@ export default function Transfernft() {
       </Fragment>
     );
   }
+
   const handleCloseDialog = () => {
     setShowDialog(false);
+  };
+
+  const handleReceiverAddressChange = (e) => {
+    setReceiverAddress(e.target.value);
+  };
+
+  const handleNftSelect = (e) => {
+    setSelectedNft(e.target.value);
   };
 
   return (
@@ -136,21 +179,31 @@ export default function Transfernft() {
                       id="grid-receiver-address"
                       type="text"
                       value={receiverAddress}
+                      onChange={handleReceiverAddressChange} // Bind the value to the receiverAddress state variable
                     />
-                    {/* <select
-                className="form-select block w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                id="grid-receiver-address"
-              >
-                <option>
-                  0xb3Ed329EC47337016ABD6ac9871A394103968F11
-                </option>
-                <option>
-                  0x9B1BC0e9041646ad3782642a07de82f7de7a613f
-                </option>
-                <option>
-                  0x7Ad92345e2959C7E46aE934D895Db51Ab0b37cbC
-                </option>
-              </select> */}
+                  </div>
+                </div>
+                <div className="w-full md:w-auto px-3">
+                  <label
+                    className="block uppercase tracking-wide text-gray-700 text-s font mb-2"
+                    htmlFor="grid-nft-select"
+                  >
+                    Select NFT
+                  </label>
+                  <div className="relative">
+                    <select
+                      className="form-select w-full bg-gray-200 text-gray-700 border border-black-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                      id="grid-nft-select"
+                      value={selectedNft}
+                      onChange={handleNftSelect}
+                    >
+                      <option value="">Select NFT Token No.</option>
+                      {nftList.map((nft) => (
+                        <option key={nft.tokenId} value={nft.tokenId}>
+                          {parseInt(nft.tokenId)}
+                        </option>
+                      ))}
+                    </select>
                   </div>
                 </div>
               </div>

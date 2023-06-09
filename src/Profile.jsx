@@ -1,4 +1,4 @@
-import { useLocation, useParams, Link } from "react-router-dom";
+import {  useParams} from "react-router-dom";
 import HealthNFTJSON from "./HealthNFT.json";
 import axios from "axios";
 import NFTTile from "./components/NFTTile";
