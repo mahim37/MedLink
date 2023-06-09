@@ -1,7 +1,7 @@
 import "./css/Agreed.css";
-import imgm1 from "./unlockinsights.jpeg";
-import imgm2 from "./easyintegration.jpeg";
-import imgm3 from "./teesramc.png";
+import imgm1 from "./insights.png";
+import imgm2 from "./integrate.png";
+import imgm3 from "./data.png";
 
 function MarketplacesCards() {
   return (

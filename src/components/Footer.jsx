@@ -17,10 +17,10 @@ export default function Footer() {
           </div>
           <div className="flex flex-col text-left m-1 gap-y-1">
               <h3 className="text-2xl text-slate-200 hover:text-[#0665fb] w-1/3"><a href="/">Home</a></h3>
-              <h3 className="text-2xl text-slate-200 hover:text-[#0665fb] w-1/3"><a href="/">Features</a></h3>
-              <h3 className="text-2xl text-slate-200 hover:text-[#0665fb] w-1/3"><a href="/">Insights</a></h3>
-              <h3 className="text-2xl text-slate-200 hover:text-[#0665fb] w-1/3"><a href="/">Our Team</a></h3>
-              <h3 className="text-2xl text-slate-200 hover:text-[#0665fb] w-1/3"><a href="/">Sign Up</a></h3>
+              <h3 className="text-2xl text-slate-200 hover:text-[#0665fb] w-1/3"><a href="/marketplaces">Features</a></h3>
+              <h3 className="text-2xl text-slate-200 hover:text-[#0665fb] w-1/3"><a href="/resources">Insights</a></h3>
+              <h3 className="text-2xl text-slate-200 hover:text-[#0665fb] w-1/3"><a href="/company">Our Team</a></h3>
+              <h3 className="text-2xl text-slate-200 hover:text-[#0665fb] w-1/3"><a href="/signup">Sign Up</a></h3>
             </div>
         </div>
         <div className="flex flex-col lg:w-1/3 text-left gap-y-3">
