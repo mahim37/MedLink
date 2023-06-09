@@ -1,0 +1,42 @@
+h1 {
+    font-size: 2rem;
+}
+h2 {
+    font-size: 1.2rem;
+    color: #2F0F5D;
+}
+img {
+    height: 200px;
+    width: 200px;
+}
+.infogive{
+    color: #867070;
+}
+ul {
+    list-style: none;
+}
+ul {
+    display: grid;
+    grid-template-columns: repeat(2,auto);
+    grid-gap: 10px;
+    list-style: none;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+}
+@media screen and (min-width:723px){
+    .rowtwo {
+        display: grid;
+        grid-template-columns: repeat(2,auto);
+        grid-gap: 100px;
+        align-items: center;
+        text-align: center;
+        justify-content: center;
+    }
+}
+@media screen and (max-width: 723px) {
+    .row{
+        display: flex;
+        flex-direction: column;
+    }
+  }

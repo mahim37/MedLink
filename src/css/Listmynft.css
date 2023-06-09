@@ -1,0 +1,23 @@
+.listmynft {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  align-items: center;
+  overflow: auto;
+}
+.mb-6 {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+.listbtn {
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+}
+form {
+  display: flex;
+  flex-direction: column;
+  padding: 0 20px;
+  margin-top: 40px;
+}

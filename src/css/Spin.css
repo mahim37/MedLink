@@ -1,0 +1,89 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.App {
+  text-align: center;
+  overflow: auto;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+/* 
+.enableEthereumButton {
+  background-color: #3b82f6;
+  color: #fff;
+  font-weight: bold;
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.enableEthereumButton:hover {
+  background-color: #10b981;
+}
+
+.enableEthereumButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+} */
+.profileClass {
+  margin-left: 20px;
+}
+.extrabuttons {
+  display: grid;
+  grid-template-columns: repeat(2,auto);
+  margin-top: 50%;
+  grid-gap: 10%;
+}
+.eb {
+  height: 40px;
+  width: 120px;
+}
+.dashboard-design {
+  display: grid;
+  grid-template-columns: repeat(2,auto);
+  grid-gap: 20%;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.extrabuttons {
+  margin-right: 15%;
+  display: grid;
+    grid-template-columns: repeat(2,auto);
+    grid-gap: 10px;
+}
