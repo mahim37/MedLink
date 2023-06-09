@@ -6,6 +6,9 @@ import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Burnable.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
+import "@chainlink/contracts/src/v0.8/VRFConsumerBaseV2.sol";
+import "@chainlink/contracts/src/v0.8/ConfirmedOwner.sol";
+import "@chainlink/contracts/src/v0.8/interfaces/VRFCoordinatorV2Interface.sol";
 
 contract HealthNFT is ERC721URIStorage, ERC721Burnable {
     using Counters for Counters.Counter;
@@ -19,7 +22,7 @@ contract HealthNFT is ERC721URIStorage, ERC721Burnable {
 
     address payable owner;
     uint256 listPrice = 0.01 ether;
-
+    bytes32 internal keyHash;
     struct ListedToken {
         uint256 tokenId;
         address payable owner;
@@ -35,10 +38,17 @@ contract HealthNFT is ERC721URIStorage, ERC721Burnable {
         uint256 price,
         bool currentlyListed
     );
+    uint256 public randomId;
+
     mapping(uint256 => ListedToken) private idToListedToken;
+    VRFCoordinatorV2Interface COORDINATOR;
 
     constructor() ERC721("HealthNFT", "HFT") {
         owner = payable(msg.sender);
+        COORDINATOR = VRFCoordinatorV2Interface(
+            0x8103B0A8A00be2DDC778e6e7eaa21791Cd364625
+        );
+        keyHash = 0x2ed0feb3e7fd2022120aa84fab1945545a9f2ffc9076fd6156fa96eaff4c1311;
     }
 
     function tokenURI(
@@ -132,9 +142,6 @@ contract HealthNFT is ERC721URIStorage, ERC721Burnable {
     }
 
     function createListedToken(uint256 tokenId, uint256 price) private {
-        //Make sure the sender sent enough ETH to pay for listing
-        // require(msg.value == listPrice, "Hopefully sending the correct price");
-
         require(price > 0, "Make sure the price isn't negative");
 
         idToListedToken[tokenId] = ListedToken(

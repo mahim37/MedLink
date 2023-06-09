@@ -10,6 +10,7 @@ export const uploadJSONToIPFS = async (JSONBody) => {
       headers: {
         pinata_api_key: key,
         pinata_secret_api_key: secret,
+        Accept: "text/plain",
       },
     })
     .then(function (response) {
@@ -69,6 +70,7 @@ export const uploadFileToIPFS = async (file) => {
         "Content-Type": `multipart/form-data; boundary=${data._boundary}`,
         pinata_api_key: key,
         pinata_secret_api_key: secret,
+        Accept: "text/plain",
       },
     })
     .then(function (response) {

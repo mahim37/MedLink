@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { uploadFileToIPFS, uploadJSONToIPFS } from "./pinata";
 import Footer from './components/Footer'
-import { useLocation } from "react-router";
 import "./css/Listmynft.css";
 import NewNavbar from "./components/NewNavbar";
 import HealthNFT from "./HealthNFT.json";
@@ -20,7 +19,6 @@ export default function Listmynft() {
   const [fileURL, setFileURL] = useState(null);
 
   const [message, updateMessage] = useState("");
-  const location = useLocation();
   const [showDialog, setShowDialog] = useState(false);
   const [dialogMessage, setDialogMessage] = useState("");
 

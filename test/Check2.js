@@ -1,11 +1,11 @@
-//1. Test that a user can create a token.
+// 1. Test that a user can create a token.
 // Test that a user can get the latest ID of a listed token.
 // Test that a user can get a listed token by its ID.
 // Test that a user can get their own NFTs.
 // Test that a user can update the list price.
 // Test that a user can get the list price.
-//2. Test that a user can transfer an NFT.
-//3. Test that a user can burn a copy of an NFT.
+// 2. Test that a user can transfer an NFT.
+// 3. Test that a user can burn a copy of an NFT.
 // Test that a user cannot burn a master NFT.
 // Test that only the owner can update the list price.
 // Test that a listed token has the correct properties after being created.
