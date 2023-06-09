@@ -3,21 +3,30 @@ import NewNavbar from "./components/NewNavbar";
 import { ethers } from "ethers";
 import React from "react";
 import HealthNFTJSON from "./HealthNFT.json";
-import { useState, useEffect } from "react";
+import { useState} from "react";
 import { Fragment } from "react";
+
 export default function Transfernft() {
   const [showDialog, setShowDialog] = useState(false);
   const [dialogMessage, setDialogMessage] = useState("");
+  const [senderAddress, setSenderAddress] = useState("");
+  const [receiverAddress, setReceiverAddress] = useState("");
+  const walletAddr = async () => {
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const signer = provider.getSigner();
+    const addr = await signer.getAddress();
+    setSenderAddress(addr);
+  };
+  walletAddr();
 
   const transfer = async (e) => {
     e.preventDefault();
 
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const signer = provider.getSigner();
-    const addr = await signer.getAddress();
-    console.log(addr);
+    // console.log(addr);
 
-    const to = "0xb3Ed329EC47337016ABD6ac9871A394103968F11";
+    const to = receiverAddress;
     const tokenId = 0;
     let contract = new ethers.Contract(
       HealthNFTJSON.address,
@@ -29,6 +38,7 @@ export default function Transfernft() {
     // console.log(transaction);
     await transaction.wait();
     setDialogMessage(`Successfully Transferred your NFT to address ${to}!`);
+    setReceiverAddress("");
     setShowDialog(true);
 
     // alert(`Successfully Transferred your NFT to address ${to}!`);
@@ -93,12 +103,12 @@ export default function Transfernft() {
       <div className="flex justify-center">
         <div className="transferform mx-auto">
           <div className="transferform mx-auto">
-            <form className="w-full max-w-lg">
+            <form className="w-full max-w-7xl">
               <div className="flex flex-wrap -mx-3 mb-6">
-                <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                <div className="w-full md:w-[436px] px-3 mb-6 md:mb-0">
                   <div className="formkalook">
                     <label
-                      className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                      className="block uppercase tracking-wide text-gray-700 text-s font mb-2"
                       htmlFor="grid-sender-address"
                     >
                       Sender Wallet Address
@@ -107,41 +117,50 @@ export default function Transfernft() {
                       className="form-input w-full bg-gray-200 text-gray-700 border border-black-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                       id="grid-sender-address"
                       type="text"
+                      value={senderAddress}
+                      readOnly // Bind the value to the senderAddress state variable
                     />
                   </div>
                 </div>
-                <div className="w-full md:w-1/2 px-3">
+                <br></br>
+                <div className="w-full md:w-auto px-3">
                   <label
-                    className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                    className="block uppercase tracking-wide text-gray-700 text-s font mb-2"
                     htmlFor="grid-receiver-address"
                   >
                     Receiver Wallet Address
                   </label>
                   <div className="relative">
-                    <select
-                      className="form-select block w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                    <input
+                      className="form-input w-full bg-gray-200 text-gray-700 border border-black-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                       id="grid-receiver-address"
-                    >
-                      <option>
-                        0xb3Ed329EC47337016ABD6ac9871A394103968F11
-                      </option>
-                      <option>
-                        0x9B1BC0e9041646ad3782642a07de82f7de7a613f
-                      </option>
-                      <option>
-                        0x7Ad92345e2959C7E46aE934D895Db51Ab0b37cbC
-                      </option>
-                    </select>
+                      type="text"
+                      value={receiverAddress}
+                    />
+                    {/* <select
+                className="form-select block w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                id="grid-receiver-address"
+              >
+                <option>
+                  0xb3Ed329EC47337016ABD6ac9871A394103968F11
+                </option>
+                <option>
+                  0x9B1BC0e9041646ad3782642a07de82f7de7a613f
+                </option>
+                <option>
+                  0x7Ad92345e2959C7E46aE934D895Db51Ab0b37cbC
+                </option>
+              </select> */}
                   </div>
                 </div>
               </div>
               <br />
               <button
-  className="btn bg-blue-500 text-white hover:bg-blue-700 h-11"
-  onClick={transfer}
->
-  Transfer NFT
-</button>
+                className="btn bg-blue-500 text-white hover:bg-blue-700 h-11"
+                onClick={transfer}
+              >
+                Transfer NFT
+              </button>
 
               {showDialog && (
                 <Dialog message={dialogMessage} onClose={handleCloseDialog} />
