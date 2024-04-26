@@ -2,7 +2,7 @@
   "name": "medmask",
   "version": "0.1.0",
   "private": true,
-  "proxy": " https://gateway.pinata.cloud/",
+  "proxy": "https://gateway.pinata.cloud",
   "dependencies": {
     "@chainlink/contracts": "^0.6.1",
     "@openzeppelin/contracts": "^4.8.2",
