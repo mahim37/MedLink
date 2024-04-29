@@ -16,7 +16,7 @@ export default class Navbar extends Component {
       <nav className="NavbarItems bg-slate-900 p-10">
         <div className="flex">
           <img className="w-16 h-16" src={log} alt="Logo"/>
-          <h1 className="text-4xl p-3 text-slate-100"><a href="/">MedLink</a></h1>
+          <h1 className="text-4xl p-3 text-slate-100"><a href="/">MEdMASk</a></h1>
         </div>
         <div className="menu-icons" onClick={this.handleClick}>
           <i

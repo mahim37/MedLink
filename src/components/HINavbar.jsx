@@ -77,7 +77,7 @@ export default function HINavbar() {
     <nav className="NavbarItems">
       <div className="flex">
           <img className="w-16 h-16" src={log} alt="Logo"/>
-          <h1 className="text-4xl p-3 text-slate-100"><a href="/">MedLink</a></h1>
+          <h1 className="text-4xl p-3 text-slate-100"><a href="/">MEdMASk</a></h1>
         </div>
       <div className="menu-icons" onClick={handleClick}>
         <i className={clicked ? "fas fa-times" : "fas fa-bars"} style={{color: "aliceblue"}}></i>

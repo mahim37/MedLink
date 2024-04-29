@@ -1,4 +1,4 @@
-# Medical NFTs: MedLink
+# Medical NFTs: MEdMASk
 
 This project aims to create a platform for managing medical documents using NFTs (non-fungible tokens). NFTs are unique digital assets that can represent anything from art to music to medical data.
 

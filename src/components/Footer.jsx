@@ -8,7 +8,7 @@ export default function Footer() {
         <div className="flex flex-col lg:w-2/5">
             <div className="flex">
               <img className="w-20 h-20" src={log} alt="Logo"/>
-              <h1 className="text-6xl p-3 text-slate-100"><a href="/">MedLink</a></h1>
+              <h1 className="text-6xl p-3 text-slate-100"><a href="/">MEdMASk</a></h1>
             </div>
         </div>
         <div className="flex flex-col lg:w-1/3 m-1">
@@ -27,7 +27,7 @@ export default function Footer() {
           <h3 className="text-3xl text-slate-200">Contact Us</h3>
           <p className="text-2xl text-slate-300">
             <MDBIcon icon="envelope" className="me-3" />
-            support@medlink.com
+            support@medmask.com
           </p>
           <p className="text-2xl text-slate-300">
             <MDBIcon icon="phone" className="me-3" /> +91 8770062687
@@ -37,7 +37,7 @@ export default function Footer() {
       <hr className="flex w-4/5 mx-auto h-1"></hr>
       <div className="flex text-xl text-slate-400 justify-center p-4">
         <p>
-          © 2023 Copyright <a className='text-reset fw-bold' href='/'>MedLink.Systems</a>
+          © 2023 Copyright <a className='text-reset fw-bold' href='/'>MEdMASk.Systems</a>
         </p>  
       </div>
     </footer>
