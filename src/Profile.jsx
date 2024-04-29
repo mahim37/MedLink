@@ -31,10 +31,10 @@ export default function Dashboard() {
     const items = await Promise.all(
       transactions.map(async (i) => {
         const tokenURI = await contract.tokenURI(i.tokenId);
-        console.log(tokenURI);
+        // console.log(tokenURI);
         let meta = await axios.get(tokenURI);
         meta = meta.data;
-        console.log(meta);
+        // console.log(meta);
         let price = ethers.utils.formatUnits(i.price.toString(), "ether");
         let item = {
           price,
@@ -50,8 +50,8 @@ export default function Dashboard() {
           diagnosis: meta.diagnosis,
           date: meta.date,
         };
+        console.log(item);
         sumPrice += Number(price);
-        console.log(sumPrice);
         return item;
       })
     );

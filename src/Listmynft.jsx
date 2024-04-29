@@ -8,6 +8,7 @@ import { ethers } from "ethers";
 import { Fragment } from "react";
 export default function Listmynft() {
   const [isCheckboxChecked, setIsCheckboxChecked] = useState(false);
+  const pinataGatewayURI="https://gateway.pinata.cloud/ipfs/";
 
   const [formParams, updateFormParams] = useState({
     name: "",
@@ -29,10 +30,10 @@ export default function Listmynft() {
     try {
       // upload the file to IPFS
       const response = await uploadFileToIPFS(file);
-      if (response.success === true) {
-        console.log("Uploaded image to Pinata: ", response.pinataURL);
-        setFileURL(response.pinataURL);
-      }
+        console.log(response);
+        console.log(`Uploaded File to Pinata: ${pinataGatewayURI}${response.IpfsHash}`);
+        const resFile = `${pinataGatewayURI}${response.IpfsHash}`;
+        setFileURL(resFile);
     } catch (e) {
       console.log("Error during file upload", e);
     }
@@ -54,10 +55,9 @@ export default function Listmynft() {
     try {
       //upload the metadata JSON to IPFS
       const response = await uploadJSONToIPFS(nftJSON);
-      console.log(response.message);
-      if (response.success === true) {
-        console.log("Uploaded JSON to Pinata: ", response);
-        return response.pinataURL;
+      if (response) {
+        console.log(`Uploaded JSON to Pinata: , ${pinataGatewayURI}${response.IpfsHash}`);
+        return `${pinataGatewayURI}${response.IpfsHash}`;
       }
     } catch (e) {
       console.log("error uploading JSON metadata:", e);
@@ -102,7 +102,6 @@ export default function Listmynft() {
     }
   }
 
-  console.log("Working", process.env);
   function Dialog({ message, onClose }) {
     return (
       <Fragment>
